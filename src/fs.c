@@ -4,7 +4,6 @@ typedef struct {
   char *name;
   size_t size;
   off_t disk_offset;
-  off_t open_offset;
 } Finfo;
 
 enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB, FD_EVENTS, FD_DISPINFO, FD_NORMAL};
