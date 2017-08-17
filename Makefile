@@ -4,7 +4,6 @@ LIBS = klib
 include $(AM_HOME)/Makefile.app
 
 FSIMG_PATH = $(NAVY_HOME)/fsimg
-#FSIMG_FILES = $(shell find $(FSIMG_PATH) -type f)
 RAMDISK_FILE = build/ramdisk.img
 
 OBJCOPY_FLAG = -S --set-section-flags .bss=alloc,contents -O binary
@@ -23,7 +22,7 @@ update-ramdisk-fsimg: update-fsimg
 	$(eval FSIMG_FILES := $(shell find $(FSIMG_PATH) -type f))
 	@for f in $(FSIMG_FILES); do \
 		if $(READELF) -h $$f 2> /dev/null > /dev/null; then \
-			$(OBJCOPY) --set-section-flags .bss=alloc,contents -O binary $$f; \
+			$(OBJCOPY) $(OBJCOPY_FLAG) $$f; \
 		fi \
 	done
 	@cat $(FSIMG_FILES) > $(RAMDISK_FILE)
