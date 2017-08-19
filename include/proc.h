@@ -4,7 +4,7 @@
 #include "common.h"
 #include "memory.h"
 
-#define STACK_SIZE (256 * PGSIZE)
+#define STACK_SIZE (8 * PGSIZE)
 
 typedef union {
   uint8_t stack[STACK_SIZE] PG_ALIGN;
