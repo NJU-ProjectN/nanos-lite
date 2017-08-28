@@ -3,10 +3,8 @@
 
 #include "common.h"
 
-#define KERNEL_LABEL " {kernel} "
-
 #define Log(format, ...) \
-  printk("\33[1;35m[%s,%d,%s]" KERNEL_LABEL format "\33[0m\n", \
+  printk("\33[1;35m[%s,%d,%s] " format "\33[0m\n", \
       __FILE__, __LINE__, __func__, ## __VA_ARGS__)
 
 #define panic(format, ...) \
