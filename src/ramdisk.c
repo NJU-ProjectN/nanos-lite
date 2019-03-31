@@ -10,15 +10,17 @@ extern uint8_t ramdisk_end;
  */
 
 /* read `len' bytes starting from `offset' of ramdisk into `buf' */
-void ramdisk_read(void *buf, off_t offset, size_t len) {
+size_t ramdisk_read(void *buf, size_t offset, size_t len) {
   assert(offset + len <= RAMDISK_SIZE);
   memcpy(buf, &ramdisk_start + offset, len);
+  return len;
 }
 
 /* write `len' bytes starting from `buf' into the `offset' of ramdisk */
-void ramdisk_write(const void *buf, off_t offset, size_t len) {
+size_t ramdisk_write(const void *buf, size_t offset, size_t len) {
   assert(offset + len <= RAMDISK_SIZE);
   memcpy(&ramdisk_start + offset, buf, len);
+  return len;
 }
 
 void init_ramdisk() {

@@ -10,6 +10,6 @@ It is a two-tasking operating system with the following features
   * with fix number and size of files
   * without directory
   * some device files
-* 6 system calls
-  * open, read, write, lseek, close, brk
+* 8 system calls
+  * open, read, write, lseek, close, brk, exit, execve
 * scheduler with two tasks

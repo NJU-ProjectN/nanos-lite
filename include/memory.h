@@ -13,6 +13,6 @@
 #define PGROUNDUP(sz)   (((sz)+PGSIZE-1) & ~PGMASK)
 #define PGROUNDDOWN(a)  (((a)) & ~PGMASK)
 
-void* new_page(void);
+void* new_page(size_t);
 
 #endif

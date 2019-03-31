@@ -1,6 +1,6 @@
 #include "common.h"
 
-static _RegSet* do_event(_Event e, _RegSet* r) {
+static _Context* do_event(_Event e, _Context* c) {
   switch (e.event) {
     default: panic("Unhandled event ID = %d", e.event);
   }
@@ -9,5 +9,6 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 }
 
 void init_irq(void) {
-  _asye_init(do_event);
+  Log("Initializing interrupt/exception handler...");
+  _cte_init(do_event);
 }
