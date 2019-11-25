@@ -19,7 +19,7 @@ SINGLE_APP_FILE = $(FSIMG_PATH)/bin/$(notdir $(SINGLE_APP))
 
 update-ramdisk-single:
 	$(MAKE) -s -C $(SINGLE_APP) install ISA=$(ISA)
-	ln -sf $(SINGLE_APP_FILE) $(RAMDISK_FILE)
+	cp $(SINGLE_APP_FILE) $(RAMDISK_FILE)
 	touch src/files.h
 
 update-fsimg:
