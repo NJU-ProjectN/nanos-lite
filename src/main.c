@@ -1,15 +1,14 @@
-#include "common.h"
+#include <common.h>
 
 void init_mm(void);
-void init_ramdisk(void);
 void init_device(void);
+void init_ramdisk(void);
 void init_irq(void);
 void init_fs(void);
 void init_proc(void);
 
-extern const char logo[];
-
 int main() {
+  extern const char logo[];
   printf("%s", logo);
   Log("'Hello World!' from Nanos-lite");
   Log("Build time: %s, %s", __TIME__, __DATE__);
@@ -18,9 +17,9 @@ int main() {
   init_mm();
 #endif
 
-  init_ramdisk();
-
   init_device();
+
+  init_ramdisk();
 
 #ifdef HAS_CTE
   init_irq();
@@ -33,7 +32,7 @@ int main() {
   Log("Finish initialization");
 
 #ifdef HAS_CTE
-  _yield();
+  yield();
 #endif
 
   panic("Should not reach here");

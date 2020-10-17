@@ -1,7 +1,7 @@
-#include "proc.h"
+#include <proc.h>
 #include <elf.h>
 
-#ifdef __ISA_AM_NATIVE__
+#ifdef __LP64__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
 #else
@@ -16,24 +16,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
 void naive_uload(PCB *pcb, const char *filename) {
   uintptr_t entry = loader(pcb, filename);
-  Log("Jump to entry = %x", entry);
+  Log("Jump to entry = %p", entry);
   ((void(*)())entry) ();
 }
 
-void context_kload(PCB *pcb, void *entry) {
-  _Area stack;
-  stack.start = pcb->stack;
-  stack.end = stack.start + sizeof(pcb->stack);
-
-  pcb->cp = _kcontext(stack, entry, NULL);
-}
-
-void context_uload(PCB *pcb, const char *filename) {
-  uintptr_t entry = loader(pcb, filename);
-
-  _Area stack;
-  stack.start = pcb->stack;
-  stack.end = stack.start + sizeof(pcb->stack);
-
-  pcb->cp = _ucontext(&pcb->as, stack, stack, (void *)entry, NULL);
-}

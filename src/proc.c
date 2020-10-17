@@ -1,4 +1,4 @@
-#include "proc.h"
+#include <proc.h>
 
 #define MAX_NR_PROC 4
 
@@ -13,9 +13,9 @@ void switch_boot_pcb() {
 void hello_fun(void *arg) {
   int j = 1;
   while (1) {
-    Log("Hello World from Nanos-lite for the %dth time!", j);
+    Log("Hello World from Nanos-lite with arg '%p' for the %dth time!", (uintptr_t)arg, j);
     j ++;
-    _yield();
+    yield();
   }
 }
 
@@ -28,6 +28,6 @@ void init_proc() {
 
 }
 
-_Context* schedule(_Context *prev) {
+Context* schedule(Context *prev) {
   return NULL;
 }

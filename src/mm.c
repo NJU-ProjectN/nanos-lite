@@ -1,12 +1,13 @@
-#include "memory.h"
+#include <memory.h>
 
 static void *pf = NULL;
 
 void* new_page(size_t nr_page) {
-  void *p = pf;
-  pf += PGSIZE * nr_page;
-  assert(pf < (void *)_heap.end);
-  return p;
+  return NULL;
+}
+
+static void* pg_alloc(int n) {
+  return NULL;
 }
 
 void free_page(void *p) {
@@ -14,13 +15,13 @@ void free_page(void *p) {
 }
 
 /* The brk() system call handler. */
-int mm_brk(uintptr_t brk, intptr_t increment) {
+int mm_brk(uintptr_t brk) {
   return 0;
 }
 
 void init_mm() {
-  pf = (void *)PGROUNDUP((uintptr_t)_heap.start);
+  pf = (void *)ROUNDUP(heap.start, PGSIZE);
   Log("free physical pages starting from %p", pf);
 
-  _vme_init(new_page, free_page);
+  vme_init(pg_alloc, free_page);
 }

@@ -1,14 +1,14 @@
-#include "common.h"
+#include <common.h>
 
-static _Context* do_event(_Event e, _Context* c) {
+static Context* do_event(Event e, Context* c) {
   switch (e.event) {
     default: panic("Unhandled event ID = %d", e.event);
   }
 
-  return NULL;
+  return c;
 }
 
 void init_irq(void) {
   Log("Initializing interrupt/exception handler...");
-  _cte_init(do_event);
+  cte_init(do_event);
 }
