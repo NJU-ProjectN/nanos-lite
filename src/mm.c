@@ -6,7 +6,7 @@ void* new_page(size_t nr_page) {
   return NULL;
 }
 
-static void* pg_alloc(int n) {
+static inline void* pg_alloc(int n) {
   return NULL;
 }
 
@@ -23,5 +23,7 @@ void init_mm() {
   pf = (void *)ROUNDUP(heap.start, PGSIZE);
   Log("free physical pages starting from %p", pf);
 
+#ifdef HAS_VME
   vme_init(pg_alloc, free_page);
+#endif
 }
