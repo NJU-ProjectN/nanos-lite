@@ -6,9 +6,11 @@ void* new_page(size_t nr_page) {
   return NULL;
 }
 
-static inline void* pg_alloc(int n) {
+#ifdef HAS_VME
+static void* pg_alloc(int n) {
   return NULL;
 }
+#endif
 
 void free_page(void *p) {
   panic("not implement yet");
